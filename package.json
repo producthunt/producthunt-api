@@ -1,0 +1,38 @@
+{
+  "name": "producthunt-api-starter",
+  "version": "1.0.0",
+  "description": "Minimal Node + React starter kit for Product Hunt's API V2",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "build": "cd client && yarn && yarn build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/producthunt/producthunt-api.git"
+  },
+  "keywords": [
+    "producthunt",
+    "graphql",
+    "react",
+    "apollo",
+    "node"
+  ],
+  "author": "Dhruv Parmar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/producthunt/producthunt-api/issues"
+  },
+  "homepage": "https://github.com/producthunt/producthunt-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^7.0.0",
+    "es6-promise": "^4.2.6",
+    "express": "^4.16.4",
+    "https": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
