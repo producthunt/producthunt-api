@@ -62,7 +62,7 @@ Useful Links:
 
 * GraphQL Reference: [http://api-v2-docs.producthunt.com.s3-website-us-east-1.amazonaws.com/operation/query/](http://api-v2-docs.producthunt.com.s3-website-us-east-1.amazonaws.com/operation/query/).
 
-* API Explorer: [https://ph-graph-api-explorer.herokuapp.com/](https://api.producthunt.com/v2/explorer)(uses GraphiQL).
+* API Explorer: [https://ph-graph-api-explorer.herokuapp.com/](https://ph-graph-api-explorer.herokuapp.com/)(uses GraphiQL).
 
 For feedback, requests and bugs please visit: [https://github.com/producthunt/producthunt-api/issues](https://github.com/producthunt/producthunt-api/issues)
 
