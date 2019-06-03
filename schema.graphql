@@ -185,7 +185,7 @@ type Comment implements VotableInterface {
   id: ID!
 
   """
-  Whether viewer has voted for the object or not.
+  Whether the Viewer has voted for the object or not.
   """
   isVoted: Boolean!
 
@@ -243,6 +243,37 @@ type Comment implements VotableInterface {
   ID of User who posted the comment.
   """
   userId: ID!
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Select Votes which were created after the given date and time.
+    """
+    createdAfter: DateTime
+
+    """
+    Select Votes which were created before the given date and time.
+    """
+    createdBefore: DateTime
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): VoteConnection!
 
   """
   Number of votes that the object has currently.
@@ -367,6 +398,11 @@ type Goal {
   ID of the goal.
   """
   id: ID!
+
+  """
+  Whether the Viewer has cheered the goal or not.
+  """
+  isCheered: Boolean!
 
   """
   Maker project to which the goal belongs to.
@@ -882,6 +918,16 @@ type Mutation {
   Update a Goal's `due_at`, `title`, `project` or `group` fields. Returns the updated Goal.
   """
   goalUpdate(input: GoalUpdateInput!): GoalUpdatePayload!
+
+  """
+  Follow a User as Viewer. Returns the followed User.
+  """
+  userFollow(input: UserFollowInput!): UserFollowPayload!
+
+  """
+  Stop following a User as Viewer. Returns the un-followed User.
+  """
+  userFollowUndo(input: UserFollowUndoInput!): UserFollowUndoPayload!
 }
 
 """
@@ -914,7 +960,7 @@ A post.
 """
 type Post implements TopicableInterface & VotableInterface {
   """
-  Lookup collections which the post is part of.
+  Lookup collections which the Post is part of.
   """
   collections(
     """
@@ -939,7 +985,7 @@ type Post implements TopicableInterface & VotableInterface {
   ): CollectionConnection!
 
   """
-  Lookup comments on the post.
+  Lookup comments on the Post.
   """
   comments(
     """
@@ -969,72 +1015,72 @@ type Post implements TopicableInterface & VotableInterface {
   ): CommentConnection!
 
   """
-  Number of comments made on the post.
+  Number of comments made on the Post.
   """
   commentsCount: Int!
 
   """
-  Identifies the date and time when post was created.
+  Identifies the date and time when the Post was created.
   """
   createdAt: DateTime!
 
   """
-  Description of the post in plain text.
+  Description of the Post in plain text.
   """
   description: String
 
   """
-  Identifies the date and time when post was featured.
+  Identifies the date and time when the Post was featured.
   """
   featuredAt: DateTime
 
   """
-  ID of the post.
+  ID of the Post.
   """
   id: ID!
 
   """
-  Whether the viewer has added the post to one of their collections.
+  Whether the viewer has added the Post to one of their collections.
   """
   isCollected: Boolean!
 
   """
-  Whether viewer has voted for the object or not.
+  Whether the Viewer has voted for the object or not.
   """
   isVoted: Boolean!
 
   """
-  Users who are marked as makers of the post.
+  Users who are marked as makers of the Post.
   """
   makers: [User!]!
 
   """
-  Media items for the post.
+  Media items for the Post.
   """
   media: [Media!]!
 
   """
-  Name of the post.
+  Name of the Post.
   """
   name: String!
 
   """
-  Aggregate review rating for the post.
+  Aggregate review rating for the Post.
   """
   reviewsRating: Float!
 
   """
-  URL friendly slug of the post.
+  URL friendly slug of the Post.
   """
   slug: String!
 
   """
-  Tagline of the post.
+  Tagline of the Post.
   """
   tagline: String!
 
   """
-  Thumbnail media object of the post.
+  Thumbnail media object of the Post.
   """
   thumbnail: Media
 
@@ -1064,19 +1110,50 @@ type Post implements TopicableInterface & VotableInterface {
   ): TopicConnection!
 
   """
-  URL of the post on Product Hunt.
+  URL of the Post on Product Hunt.
   """
   url: String!
 
   """
-  User who created the post.
+  User who created the Post.
   """
   user: User!
 
   """
-  ID of User who created the post.
+  ID of User who created the Post.
   """
   userId: ID!
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Select Votes which were created after the given date and time.
+    """
+    createdAfter: DateTime
+
+    """
+    Select Votes which were created before the given date and time.
+    """
+    createdBefore: DateTime
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): VoteConnection!
 
   """
   Number of votes that the object has currently.
@@ -1084,7 +1161,7 @@ type Post implements TopicableInterface & VotableInterface {
   votesCount: Int!
 
   """
-  URL that redirects to the post's website.
+  URL that redirects to the Post's website.
   """
   website: String!
 }
@@ -1864,6 +1941,60 @@ type UserEdge {
 }
 
 """
+Autogenerated input type of UserFollow
+"""
+input UserFollowInput {
+  """
+  A unique identifier for the client performing the mutation.
+  """
+  clientMutationId: String
+
+  """
+  ID of the User to follow.
+  """
+  userId: ID!
+}
+
+"""
+Autogenerated return type of UserFollow
+"""
+type UserFollowPayload {
+  """
+  A unique identifier for the client performing the mutation.
+  """
+  clientMutationId: String
+  errors: [Error!]!
+  node: User
+}
+
+"""
+Autogenerated input type of UserFollowUndo
+"""
+input UserFollowUndoInput {
+  """
+  A unique identifier for the client performing the mutation.
+  """
+  clientMutationId: String
+
+  """
+  ID of the User to stop following.
+  """
+  userId: ID!
+}
+
+"""
+Autogenerated return type of UserFollowUndo
+"""
+type UserFollowUndoPayload {
+  """
+  A unique identifier for the client performing the mutation.
+  """
+  clientMutationId: String
+  errors: [Error!]!
+  node: User
+}
+
+"""
 Top level scope for the user in whose context the API is running.
 """
 type Viewer {
@@ -1973,12 +2104,103 @@ interface VotableInterface {
   id: ID!
 
   """
-  Whether viewer has voted for the object or not.
+  Whether the Viewer has voted for the object or not.
   """
   isVoted: Boolean!
+  votes(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Select Votes which were created after the given date and time.
+    """
+    createdAfter: DateTime
+
+    """
+    Select Votes which were created before the given date and time.
+    """
+    createdBefore: DateTime
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+  ): VoteConnection!
 
   """
   Number of votes that the object has currently.
   """
   votesCount: Int!
+}
+
+"""
+A vote.
+"""
+type Vote {
+  """
+  Identifies the date and time when Vote was created.
+  """
+  createdAt: DateTime!
+
+  """
+  ID of the Vote.
+  """
+  id: ID!
+
+  """
+  User who created the Vote.
+  """
+  user: User!
+
+  """
+  ID of User who created the Vote.
+  """
+  userId: ID!
+}
+
+"""
+The connection type for Vote.
+"""
+type VoteConnection {
+  """
+  A list of edges.
+  """
+  edges: [VoteEdge!]!
+
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  Total number of objects returned from this query
+  """
+  totalCount: Int!
+}
+
+"""
+An edge in a connection.
+"""
+type VoteEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: Vote!
 }
