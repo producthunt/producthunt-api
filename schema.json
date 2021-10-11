@@ -518,7 +518,7 @@
                 },
                 {
                   "name": "postedBefore",
-                  "description": "Select Posts which were posted before the given date and time.",
+                  "description": "Select Posts which were posted before the given date and time. Exclusive boundary.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "DateTime",
@@ -528,7 +528,7 @@
                 },
                 {
                   "name": "postedAfter",
-                  "description": "Select Posts which were posted after the given date and time.",
+                  "description": "Select Posts which were posted after the given date and time. Inclusive boundary.",
                   "type": {
                     "kind": "SCALAR",
                     "name": "DateTime",
