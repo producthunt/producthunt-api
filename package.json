@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "build": "cd client && yarn && yarn build",
+    "build": "cd client && yarn && NODE_OPTIONS=--openssl-legacy-provider yarn build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
